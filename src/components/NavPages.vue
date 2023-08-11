@@ -1,7 +1,5 @@
 <!-- @Time  : 2023/06/06 15:36:32 -->
 <!-- @Author: wy -->
-
-
 <template>
     <div class="home" id="page-top">
         <!-- Page Wrapper -->
@@ -29,7 +27,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#realTimeTask"
                         aria-expanded="true" aria-controls="realTimeTask">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fas fa-fw fa-cogs"></i>
                         <span>实时任务运维</span>
                     </a>
                     <div id="realTimeTask" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -75,7 +73,6 @@
                             <router-link to="sshparamin"><a class="collapse-item">远程执行</a></router-link>
                             <a class="collapse-item">Jenkins</a>
                             <router-link to="mysqlInstall"><a class="collapse-item">安装数据库</a></router-link>
-                            <router-link to="addUser" class="collapse-item">添加用户</router-link>
                         </div>
                     </div>
                 </li>
@@ -125,7 +122,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#engine" aria-expanded="true"
                         aria-controls="engine">
-                        <i class="fas fa-fw fa-cogs"></i>
+                        <i class="fas fa-fw fa-space-shuttle"></i>
                         <span>引擎运维</span>
                     </a>
                     <div id="engine" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -151,8 +148,6 @@
                         </div>
                     </div>
                 </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0" />
                 <!-- Nav Item - Periodic task O&M Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#">
@@ -160,6 +155,23 @@
                         <span>操作历史</span>
                     </a>
                 </li>
+                <!-- Nav Item - system account Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#account"
+                        aria-expanded="true" aria-controls="intelligentDiagnostics">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>系统设置</span>
+                    </a>
+                    <div id="account" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">自定义实用程序:</h6>
+                            <router-link to="account" ><a class="collapse-item">账号管理</a></router-link>
+                        </div>
+                    </div>
+                </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0" />
                 <!-- Divider -->
                 <hr class="sidebar-divider" />
                 <!-- Nav Item - Pages Collapse Menu -->

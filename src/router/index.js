@@ -11,7 +11,7 @@ import zero from '@/views/a.vue'
 import sshParamin from '@/views/sshParamin.vue'
 import mysqlInstall from '@/views/mysqlInstalls.vue'
 import addUser from '@/views/addUsers.vue'
-import four from '@/views/4.vue'
+import account from '@/views/accounts.vue'
 import five from '@/views/5.vue'
 import six from '@/views/6.vue'
 import seven from '@/views/7.vue'
@@ -49,6 +49,11 @@ const routes = [
                 path: 'addUser',
                 name: 'AddUser',
                 component: addUser
+            },
+            {
+                path: 'account',
+                name: 'Account',
+                component: account
             }
 
         ]

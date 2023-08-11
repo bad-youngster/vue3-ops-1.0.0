@@ -13,7 +13,7 @@
                 <div class="table-responsive">
                     <div class="mb-2">
                     </div>
-                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered custom-table" id="myTable" width="100%" cellspacing="0">
                         <thead class="thead-light table-header">
                             <tr>
                                 <th>名称</th>
@@ -24,13 +24,13 @@
                             </tr>
                         </thead>
                         <tbody class="table-tbody">
-                            <tr>
-                                <th>mysql</th>
-                                <th>192.168.0.1</th>
-                                <th>主从</th>
+                            <tr v-for="item in form_mysql_table_data" :key="item.index">
+                                <th>{{ item.server }}</th>
+                                <th>{{ item.ip }}</th>
+                                <th>{{ item.type }}</th>
                                 <th>
                                     <a class="text-decoration-none" data-toggle="modal" data-target="#installs"
-                                        @click="randomId">安装</a>
+                                        @click="randomId(item)">安装</a>
                                 </th>
                                 <!-- 更多表头行 -->
                             </tr>
@@ -60,15 +60,15 @@
                                         <label for="" class="col-sm-4 col-form-label">主机地址</label>
                                         <div class="col-sm-8">
                                             <select class="custom-select" v-model="form_mysql_data.ip">
-                                                <option>192.168.0.176</option>
+                                                <option>{{ form_mysql_ip }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="" class="col-sm-4 col-form-label">执行用户</label>
                                         <div class="col-sm-8">
-                                            <select class="custom-select">
-                                                <option>mysql</option>
+                                            <select class="custom-select" v-model="form_mysql_data.user">
+                                                <option>jso</option>
                                             </select>
                                         </div>
                                     </div>
@@ -119,9 +119,12 @@ export default {
         const form_mysql = ref([])
         const form_mysql_url = ref([])
         const form_mysql_id = ref([])
+        const form_mysql_ip = ref([])
+        const form_mysql_table_data = ref([{ server: 'mysql', ip: '192.168.0.176', type: '主从' },])
         const form_mysql_data = ref({
             id: form_mysql_id,
             ip: '',
+            user: '',
             type: '',
             download_url: ''
         })
@@ -139,8 +142,10 @@ export default {
             })
         }
 
-        const randomId = () => {
+        const randomId = (item) => {
+            console.log(item)
             form_mysql_id.value = generateRandomId()
+            form_mysql_ip.value = item.ip
         }
         const mysqlInstallPosts = () => {
             mysqlInstallPost(form_mysql_data.value).then(res => {
@@ -151,9 +156,27 @@ export default {
 
         return {
             form_mysql, form_mysql_url, nexusComponent, form_mysql_data, nexusComponentPosts, randomId, form_mysql_id,
-            mysqlInstallPosts
+            mysqlInstallPosts, form_mysql_table_data, form_mysql_ip
         }
 
     },
 }
 </script>
+
+<style scoped>
+.custom-table {
+    font-size: 12px;
+    /* 调整为您希望的字体大小 */
+}
+
+/* 如果还想针对表头和表格内容分别调整字体大小 */
+.custom-table thead th {
+    font-size: 14px;
+    /* 调整为您希望的表头字体大小 */
+}
+
+.custom-table tbody td {
+    font-size: 12px;
+    /* 调整为您希望的表格内容字体大小 */
+}
+</style>
