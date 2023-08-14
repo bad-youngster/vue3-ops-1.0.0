@@ -78,6 +78,9 @@ export function nexusComponentPost(data) {
         }
     })
 }
+export function nexusMysqlScripts() {
+    return apiClient.get('/ops/nexusMysqlScript/')
+}
 
 export function mysqlInstallPost(data) {
     return apiClient.post('/ops/mysqlInstall/', data, {

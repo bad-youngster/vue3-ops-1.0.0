@@ -46,7 +46,12 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-4 col-form-label">昵称</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" v-model="addUserInfo.nickname">
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label for="" class="col-sm-4 col-form-label">用户名</label>
                                         <div class="col-sm-8">
@@ -88,6 +93,7 @@ export default {
     setup() {
         const getUserData = ref([])
         const addUserInfo = ref({
+            nickname: '',
             username: '',
             password: '',
             type: ''
@@ -114,20 +120,22 @@ export default {
 </script>
 <style scoped>
 .custom-table {
-  font-size: 12px; /* 调整为您希望的字体大小 */
+    font-size: 12px;
+    /* 调整为您希望的字体大小 */
 }
 
 /* 如果还想针对表头和表格内容分别调整字体大小 */
 .custom-table thead th {
-  font-size: 14px; /* 调整为您希望的表头字体大小 */
+    font-size: 14px;
+    /* 调整为您希望的表头字体大小 */
 }
 
 .custom-table tbody td {
-  font-size: 12px; /* 调整为您希望的表格内容字体大小 */
+    font-size: 12px;
+    /* 调整为您希望的表格内容字体大小 */
 }
 
 .custom-button {
-  font-size: 0.5rem !important;
-  line-height: 1 !important;
-}
-</style>
+    font-size: 0.5rem !important;
+    line-height: 1 !important;
+}</style>

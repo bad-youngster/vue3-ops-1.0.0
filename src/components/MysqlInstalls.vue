@@ -67,13 +67,15 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-4 col-form-label">执行用户</label>
                                         <div class="col-sm-8">
-                                            <select class="custom-select" v-model="form_mysql_data.user">
-                                                <option>jso</option>
+                                            <select class="custom-select" v-model="form_mysql_data.user"
+                                                @click="mysqlInstallUser">
+                                                <option v-for="item in form_mysql_user" :key="item.index">{{ item.nickname }}
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-4 col-form-label">名称</label>
+                                        <label for="" class="col-sm-4 col-form-label">类型</label>
                                         <div class="col-sm-8">
                                             <select class="custom-select" @click="nexusComponent"
                                                 v-model="form_mysql_data.type">
@@ -82,7 +84,17 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-4 col-form-label">集群</label>
+                                        <div class="col-sm-8">
+                                            <select class="custom-select" @click="nexusMysqlScript"
+                                                v-model="form_mysql_data.script_download_url">
+                                                <option v-for="item in form_mysql_script" :key="item.index"
+                                                    :value="item.downlaod_url">{{ item.path }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label for="" class="col-sm-4 col-form-label">下载地址</label>
                                         <div class="col-sm-8">
@@ -110,7 +122,7 @@
 
 
 <script>
-import { nexusComponents, nexusComponentPost, mysqlInstallPost } from '@/api/utils'
+import { nexusComponents, nexusComponentPost, mysqlInstallPost, nexusMysqlScripts, getUser } from '@/api/utils'
 import { generateRandomId } from '@/assets/js/randomId.js'
 import { ref, onMounted } from 'vue'
 
@@ -120,43 +132,62 @@ export default {
         const form_mysql_url = ref([])
         const form_mysql_id = ref([])
         const form_mysql_ip = ref([])
-        const form_mysql_table_data = ref([{ server: 'mysql', ip: '192.168.0.176', type: '主从' },])
+        const form_mysql_user = ref([])
+        const form_mysql_script = ref([])
+        const form_mysql_table_data = ref([{ server: 'mysql', ip: '192.168.0.176', type: '主从' }, { server: 'mysql', ip: '192.168.0.218', type: '主从' }, { server: 'mysql', ip: '192.168.0.219', type: '主从' }, { server: 'mysql', ip: '192.168.0.220', type: '主从' }])
         const form_mysql_data = ref({
             id: form_mysql_id,
             ip: '',
             user: '',
             type: '',
-            download_url: ''
+            download_url: '',
+            script_download_url: ''
         })
         onMounted(() => {
         })
         const nexusComponent = () => {
             nexusComponents().then(res => {
+                console.log(res)
                 form_mysql.value = res
                 nexusComponentPosts()
+            }).catch(error => {
+                console.error(error);
             })
         }
         const nexusComponentPosts = () => {
             nexusComponentPost(form_mysql_data.value).then(res => {
                 form_mysql_url.value = res
+            }).catch(error => {
+                console.error(error);
             })
         }
 
         const randomId = (item) => {
-            console.log(item)
             form_mysql_id.value = generateRandomId()
             form_mysql_ip.value = item.ip
         }
         const mysqlInstallPosts = () => {
-            mysqlInstallPost(form_mysql_data.value).then(res => {
+            mysqlInstallPost(form_mysql_data.value).catch(error => {
+                console.error(error);
+            })
+        }
+        const mysqlInstallUser = () => {
+            getUser().then(res => {
+                form_mysql_user.value = res
                 console.log(res)
             })
         }
-
-
+        const nexusMysqlScript = () => {
+            nexusMysqlScripts().then(res => {
+                form_mysql_script.value = res
+            }).catch(error => {
+                console.error(error);
+            })
+        }
         return {
             form_mysql, form_mysql_url, nexusComponent, form_mysql_data, nexusComponentPosts, randomId, form_mysql_id,
-            mysqlInstallPosts, form_mysql_table_data, form_mysql_ip
+            mysqlInstallPosts, form_mysql_table_data, form_mysql_ip, nexusMysqlScript, form_mysql_script, mysqlInstallUser, form_mysql_user
+
         }
 
     },
