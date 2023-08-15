@@ -69,7 +69,7 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">自定义实用程序:</h6>
-                            <router-link to=""><a class="collapse-item">手动任务</a></router-link>
+                            <router-link to="manualTask"><a class="collapse-item">手动任务</a></router-link>
                             <router-link to="sshparamin"><a class="collapse-item">远程执行</a></router-link>
                             <a class="collapse-item">Jenkins</a>
                             <router-link to="mysqlInstall"><a class="collapse-item">安装数据库</a></router-link>
@@ -101,19 +101,18 @@
 
                 <!-- Nav Item - Resource O&M Collapse Menu -->
                 <li class="nav-item">
-                    <router-link to="aliyunAssets">
-                        <a class="nav-link collapsed">
-                            <i class="fas fa-fw fa-server"></i>
-                            <span>资源运维</span>
-                        </a>
-                    </router-link>
-                    <div class="collapse">
+                    <a class="nav-link collapsed" data-toggle="collapse" data-target="#resource " aria-expanded="true"
+                        aria-controls="resource">
+                        <i class="fas fa-fw fa-server"></i>
+                        <span>资源运维</span>
+                    </a>
+                    <div id="resource" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">自定义实用程序:</h6>
-                            <a class="collapse-item">Colors</a>
-                            <a class="collapse-item">Borders</a>
-                            <a class="collapse-item">Animations</a>
-                            <a class="collapse-item">Other</a>
+                            <router-link to="aliyunAssets"><a class="collapse-item">阿里云资源</a></router-link>
+                            <router-link to="testAsset"><a class="collapse-item">测试机房</a></router-link>
+                            <!-- <a class="collapse-item">Animations</a>
+                            <a class="collapse-item">Other</a> -->
                         </div>
                     </div>
                 </li>
@@ -162,11 +161,10 @@
                         <i class="fas fa-fw fa-cog"></i>
                         <span>系统设置</span>
                     </a>
-                    <div id="account" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
+                    <div id="account" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">自定义实用程序:</h6>
-                            <router-link to="account" ><a class="collapse-item">账号管理</a></router-link>
+                            <router-link to="account"><a class="collapse-item">账号管理</a></router-link>
                         </div>
                     </div>
                 </li>

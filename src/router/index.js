@@ -7,16 +7,17 @@ import Login from '@/views/login.vue'
 import Register from '@/views/register.vue'
 import AliyunAssets from '@/views/aliyunassets.vue'
 import NavPages from '@/components/NavPages.vue'
-import zero from '@/views/a.vue'
 import sshParamin from '@/views/sshParamin.vue'
 import mysqlInstall from '@/views/mysqlInstalls.vue'
 import addUser from '@/views/addUsers.vue'
 import account from '@/views/accounts.vue'
-import five from '@/views/5.vue'
-import six from '@/views/6.vue'
+import testAsset from '@/views/testAssets.vue'
+import manualTask from '@/views/manualTasks.vue'
 import seven from '@/views/7.vue'
 import eight from '@/views/8.vue'
 import nine from '@/views/9.vue'
+import zero from '@/views/a.vue'
+
 
 const routes = [
     {
@@ -41,9 +42,19 @@ const routes = [
                 component: AliyunAssets
             },
             {
+                path: 'testAsset',
+                name: 'TestAsset',
+                component: testAsset
+            },
+            {
                 path: 'mysqlInstall',
                 name: 'MysqlInstall',
                 component: mysqlInstall
+            },
+            {
+                path: 'manualTask',
+                name: 'ManualTask',
+                component: manualTask
             },
             {
                 path: 'addUser',

@@ -6,7 +6,6 @@ import Account from '@/components/Accounts.vue'
 
 export default {
     setup() {
-
     },
     components: {
         Account
