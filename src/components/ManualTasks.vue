@@ -52,70 +52,20 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="row">
-                                            <div>
-                                                <p>源数据</p>
-                                                <form>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">实例ID</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                        <form class="custom-form">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">区域ID</label>
+                                                <div class="input-group col-sm-5">
+                                                    <select class="custom-select"></select>
+                                                </div>
                                             </div>
-                                            <div
-                                                class="col-3 d-flex align-items-center justify-content-center position-relative">
-                                                <div class="dashed-line"></div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">实例ID</label>
+                                                <div class="col-sm-5">
+                                                    <select class="custom-select"></select>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p>目标库</p>
-                                                <form>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -132,9 +82,24 @@
 </template>
 
 <script>
+import { selectSingleEcs } from '@/api/utils.js'
+import { ref, onMounted } from 'vue'
 export default {
     setup() {
+        const singleEcs = ref({
 
+        })
+
+        onMounted(() => {
+            selectSingleEcss()
+
+        })
+        const selectSingleEcss = () => {
+            selectSingleEcs(singleEcs.value).then(res => {
+                console.log(res)
+            })
+        }
+        return { singleEcs, selectSingleEcss }
     },
 }
 </script>
@@ -161,19 +126,12 @@ export default {
 }
 
 .custom-modal-size {
-    max-width: 70%;
+    max-width: 50%;
     /* 自定义模态框的最大宽度 */
-    max-height: 70%;
+    max-height: 50%;
 }
 
-.dashed-line {
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: #999;
-    background-image: linear-gradient(#999 33%, transparent 33%, transparent 66%, #999 66%);
-    background-size: 1px 8px;
-    background-repeat: repeat-y;
-    background-position: center;
+.custom-form {
+    font-size: 12px;
 }
 </style>

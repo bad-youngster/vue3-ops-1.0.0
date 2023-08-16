@@ -89,6 +89,21 @@ export function mysqlInstallPost(data) {
         }
     })
 }
+export function mysqlToslaves(data) {
+    return apiClient.post('/ops/mysqlToSlave/', data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+export function selectSingleEcs(data) {
+    return apiClient.post('/ops/selectSingleEcs/', data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
 
 export function addUserPost(data) {
     return apiClient.post('/ops/userAdd/', data, {
