@@ -97,6 +97,10 @@ export function mysqlToslaves(data) {
     })
 }
 
+export function getSingleEcs() {
+    return apiClient.get('/ops/getSingleEcs/')
+}
+
 export function selectSingleEcs(data) {
     return apiClient.post('/ops/selectSingleEcs/', data, {
         headers: {

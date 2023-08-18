@@ -56,13 +56,21 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">区域ID</label>
                                                 <div class="input-group col-sm-5">
-                                                    <select class="custom-select"></select>
+                                                    <select class="custom-select" @click="getSingleEcsss"
+                                                        v-model="formData.regionId">
+                                                        <option v-for="item in singleEcs" :key="item.index">{{ item.RegionId
+                                                        }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">实例ID</label>
                                                 <div class="col-sm-5">
-                                                    <select class="custom-select"></select>
+                                                    <select class="custom-select" v-model="formData.instanceId">
+                                                        <option v-for="item in singleEcs" :key="item.index"
+                                                            :value="item.InstanceId"> {{ item.InstanceName }}
+                                                        </option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </form>
@@ -70,7 +78,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary">运行</button>
+                                    <button type="button" class="btn btn-primary" @click="selectSingleEcss">运行</button>
                                 </div>
                             </div>
                         </div>
@@ -82,24 +90,39 @@
 </template>
 
 <script>
-import { selectSingleEcs } from '@/api/utils.js'
+import { selectSingleEcs, getSingleEcs } from '@/api/utils.js'
 import { ref, onMounted } from 'vue'
 export default {
     setup() {
-        const singleEcs = ref({
+        const regionId = ref([])
+        const instance = ref([])
+        const singleEcs = ref([])
+        const formData = ref({
+            regionId: '',
+            instanceId: ''
 
         })
 
         onMounted(() => {
-            selectSingleEcss()
 
         })
-        const selectSingleEcss = () => {
-            selectSingleEcs(singleEcs.value).then(res => {
-                console.log(res)
+
+        const getSingleEcsss = () => {
+            getSingleEcs().then(res => {
+                singleEcs.value = res
+            }).catch(error => {
+                console.error(error);
             })
         }
-        return { singleEcs, selectSingleEcss }
+        const selectSingleEcss = () => {
+            selectSingleEcs(formData.value).then(res => {
+                console.log(res)
+                console.log(formData)
+            }).catch(error => {
+                console.error(error);
+            })
+        }
+        return { singleEcs, selectSingleEcss, getSingleEcsss, regionId, instance, formData }
     },
 }
 </script>
