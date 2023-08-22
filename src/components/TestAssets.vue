@@ -11,8 +11,6 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div class="mb-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm custom-button" data-toggle="modal"
-                            data-target="#new_hosts">创建主机</button>
                     </div>
                     <table class="table table-bordered custom-table" id="myTable" width="100%" cellspacing="0">
                         <thead class="thead-light table-header">
@@ -44,58 +42,7 @@
                         </tbody>
                     </table>
                     <!-- Modal -->
-                    <div class="modal fade" id="new_hosts" tabindex="-1" role="dialog" aria-labelledby="newHostsCenterTitle"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="newHostsCenterTitle">Title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <dev class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" id="inputEmail3"
-                                                    placeholder="Email">
-                                            </div>
-                                        </dev>
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" id="" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" id="" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" id="" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-6">
-                                                <input type="email" class="form-control" id="" placeholder="Email">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary">保存</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div>
                         <span>total: {{ totalPages }}</span>&nbsp;
                         <button type="button" class="btn btn-outline-primary btn-sm custom-button" @click="previousPage"

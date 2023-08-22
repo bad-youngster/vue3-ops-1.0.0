@@ -55,24 +55,46 @@
                                         <form class="custom-form">
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">区域ID</label>
-                                                <div class="input-group col-sm-5">
-                                                    <select class="custom-select" @click="getSingleEcsss"
+                                                <div class="col-sm-5">
+                                                    <select class="custom-select" @click="getDescribeRegion"
                                                         v-model="formData.regionId">
-                                                        <option v-for="item in singleEcs" :key="item.index">{{ item.RegionId
-                                                        }}</option>
+                                                        <option v-for="item in describeRegion" :key="item.index">
+                                                            {{ item.regionId }}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">实例ID</label>
-                                                <div class="col-sm-5">
-                                                    <select class="custom-select" v-model="formData.instanceId">
-                                                        <option v-for="item in singleEcs" :key="item.index"
-                                                            :value="item.InstanceId"> {{ item.InstanceName }}
-                                                        </option>
+                                                <label class="col-sm-2 col-form-label">实例名称</label>
+                                                <div>
+                                                    <select class="custom-select" @click="getSingleEcs">
+                                                        <option></option>
                                                     </select>
                                                 </div>
                                             </div>
+
+                                        </form>
+                                        <hr class="bg-secondary">
+                                        <p>目标库</p>
+                                        <form class="custom-form">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">实例名称</label>
+                                                <div class="col-sm-5">
+                                                    <input value="ttttttttest">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">实例规格</label>
+                                                <div class="col-sm-5">
+                                                    <input value="4c8g">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">vpc</label>
+                                                <div class="col-sm-5">
+                                                    <input>
+                                                </div>
+                                            </div>
+
                                         </form>
                                     </div>
                                 </div>
@@ -90,13 +112,13 @@
 </template>
 
 <script>
-import { selectSingleEcs, getSingleEcs } from '@/api/utils.js'
+import { selectSingleEcs, getDescribeRegions, aliyunEcsAsset } from '@/api/utils.js'
 import { ref, onMounted } from 'vue'
 export default {
     setup() {
         const regionId = ref([])
         const instance = ref([])
-        const singleEcs = ref([])
+        const describeRegion = ref([])
         const formData = ref({
             regionId: '',
             instanceId: ''
@@ -106,14 +128,21 @@ export default {
         onMounted(() => {
 
         })
-
-        const getSingleEcsss = () => {
-            getSingleEcs().then(res => {
-                singleEcs.value = res
+        const getDescribeRegion = () => {
+            getDescribeRegions().then(res => {
+                describeRegion.value = res
+                console.log(res)
             }).catch(error => {
-                console.error(error);
+                console.log(error)
             })
         }
+        const getSingleEcs = () => {
+            aliyunEcsAsset(formData.value).then(res => {
+                console.log(res)
+            })
+
+        }
+
         const selectSingleEcss = () => {
             selectSingleEcs(formData.value).then(res => {
                 console.log(res)
@@ -122,7 +151,7 @@ export default {
                 console.error(error);
             })
         }
-        return { singleEcs, selectSingleEcss, getSingleEcsss, regionId, instance, formData }
+        return { describeRegion, selectSingleEcss, regionId, instance, formData, getDescribeRegion, getSingleEcs }
     },
 }
 </script>
