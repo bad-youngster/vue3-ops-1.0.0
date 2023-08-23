@@ -70,6 +70,7 @@ export function aliyunEcsAssets() {
 }
 
 export function aliyunEcsAsset(data) {
+    console.log(data)
     return apiClient.post('/ops/aliyunEcsAssets/', data, {
         headers: {
             'Content-Type': 'appliction/json'

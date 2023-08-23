@@ -57,7 +57,7 @@
                                                 <label class="col-sm-2 col-form-label">区域ID</label>
                                                 <div class="col-sm-5">
                                                     <select class="custom-select" @click="getDescribeRegion"
-                                                        v-model="formData.regionId">
+                                                        v-model="regionId.regionid">
                                                         <option v-for="item in describeRegion" :key="item.index">
                                                             {{ item.regionId }}</option>
                                                     </select>
@@ -65,13 +65,16 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">实例名称</label>
-                                                <div>
-                                                    <select class="custom-select" @click="getSingleEcs">
-                                                        <option></option>
+                                                <div class="col-sm-5">
+                                                    <select class="custom-select" @click="getSingleEcs"
+                                                        v-model="formData.instanceId">
+                                                        <option v-for="item in ecsAssets" :key="item.index"
+                                                            :value="item.instanceId"> {{
+                                                                item.instanceName }}
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
-
                                         </form>
                                         <hr class="bg-secondary">
                                         <p>目标库</p>
@@ -79,19 +82,13 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">实例名称</label>
                                                 <div class="col-sm-5">
-                                                    <input value="ttttttttest">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">实例规格</label>
-                                                <div class="col-sm-5">
-                                                    <input value="4c8g">
+                                                    <input type="text" class="form-control" value="ttttttttest">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">vpc</label>
                                                 <div class="col-sm-5">
-                                                    <input>
+                                                    <select class="custom-select"></select>
                                                 </div>
                                             </div>
 
@@ -116,13 +113,15 @@ import { selectSingleEcs, getDescribeRegions, aliyunEcsAsset } from '@/api/utils
 import { ref, onMounted } from 'vue'
 export default {
     setup() {
-        const regionId = ref([])
+        const regionId = ref({
+            regionid: ''
+        })
         const instance = ref([])
         const describeRegion = ref([])
+        const ecsAssets = ref([])
         const formData = ref({
-            regionId: '',
+            regionId: regionId.regionid,
             instanceId: ''
-
         })
 
         onMounted(() => {
@@ -137,8 +136,9 @@ export default {
             })
         }
         const getSingleEcs = () => {
-            aliyunEcsAsset(formData.value).then(res => {
-                console.log(res)
+            aliyunEcsAsset(regionId.value).then(res => {
+                ecsAssets.value = res
+                console.log(ecsAssets.value)
             })
 
         }
@@ -151,7 +151,7 @@ export default {
                 console.error(error);
             })
         }
-        return { describeRegion, selectSingleEcss, regionId, instance, formData, getDescribeRegion, getSingleEcs }
+        return { describeRegion, selectSingleEcss, regionId, instance, formData, getDescribeRegion, getSingleEcs, ecsAssets }
     },
 }
 </script>
