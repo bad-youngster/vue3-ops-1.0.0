@@ -70,7 +70,6 @@ export function aliyunEcsAssets() {
 }
 
 export function aliyunEcsAsset(data) {
-    console.log(data)
     return apiClient.post('/ops/aliyunEcsAssets/', data, {
         headers: {
             'Content-Type': 'appliction/json'
@@ -80,4 +79,8 @@ export function aliyunEcsAsset(data) {
 
 export function getDescribeRegions() {
     return apiClient.get('/ops/getDescribeRegions/')
+}
+
+export function getDescribeVpcs() {
+    return apiClient.get('/ops/aliyunEcsVpc/')
 }

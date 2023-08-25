@@ -57,7 +57,7 @@
                                                 <label class="col-sm-2 col-form-label">区域ID</label>
                                                 <div class="col-sm-5">
                                                     <select class="custom-select" @click="getDescribeRegion"
-                                                        v-model="regionId.regionid">
+                                                        v-model="formData.regionId">
                                                         <option v-for="item in describeRegion" :key="item.index">
                                                             {{ item.regionId }}</option>
                                                     </select>
@@ -82,13 +82,16 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">实例名称</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" value="ttttttttest">
+                                                    <input type="text" class="form-control" :value="formData.instanceName">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">vpc</label>
                                                 <div class="col-sm-5">
-                                                    <select class="custom-select"></select>
+                                                    <select class="custom-select" v-model="formData.VpcId">
+                                                        <option v-for="item in describeVpc" :key="item.index"
+                                                            :value="item.VpcId"> {{ item.VpcName }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -109,49 +112,58 @@
 </template>
 
 <script>
-import { selectSingleEcs, getDescribeRegions, aliyunEcsAsset } from '@/api/utils.js'
+import { selectSingleEcs, getDescribeRegions, aliyunEcsAsset, getDescribeVpcs } from '@/api/utils.js'
 import { ref, onMounted } from 'vue'
 export default {
     setup() {
-        const regionId = ref({
-            regionid: ''
-        })
         const instance = ref([])
         const describeRegion = ref([])
         const ecsAssets = ref([])
+        const describeVpc = ref([])
         const formData = ref({
-            regionId: regionId.regionid,
-            instanceId: ''
+            regionId: '',
+            instanceId: '',
+            instanceName: 'ttttttttest',
+            vSwitchId: '',
+            VpcId: ''
+
         })
 
         onMounted(() => {
+            getDescribeVpc()
 
         })
         const getDescribeRegion = () => {
             getDescribeRegions().then(res => {
                 describeRegion.value = res
-                console.log(res)
             }).catch(error => {
                 console.log(error)
             })
         }
         const getSingleEcs = () => {
-            aliyunEcsAsset(regionId.value).then(res => {
+            aliyunEcsAsset(formData.value).then(res => {
                 ecsAssets.value = res
-                console.log(ecsAssets.value)
             })
 
+        }
+        const getDescribeVpc = () => {
+            getDescribeVpcs().then(res => {
+                console.log(res)
+                describeVpc.value = res
+            })
         }
 
         const selectSingleEcss = () => {
             selectSingleEcs(formData.value).then(res => {
-                console.log(res)
-                console.log(formData)
+                console.log(formData.value)
             }).catch(error => {
                 console.error(error);
             })
         }
-        return { describeRegion, selectSingleEcss, regionId, instance, formData, getDescribeRegion, getSingleEcs, ecsAssets }
+        return {
+            describeRegion, selectSingleEcss, instance, formData, getDescribeRegion, getSingleEcs, ecsAssets,
+            getDescribeVpc, describeVpc
+        }
     },
 }
 </script>
